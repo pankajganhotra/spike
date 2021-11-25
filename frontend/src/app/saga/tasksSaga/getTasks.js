@@ -6,8 +6,15 @@ import { GET_TASKS } from '../../store/actionTypes/taskActionTypes';
 function* getTasks({ payload }) {
     try {
         const res = yield call(() => api.get("/tasks"))
-        getTasksSuccess(res.data)
+        getTasksSuccess({
+            items: res.data.tasks,
+            count: res.data.count
+        })
     } catch (e) {
+        getTasksSuccess({
+            items: [],
+            count: 0
+        }); //Will Set loading false
         console.error(e);
     }
 }

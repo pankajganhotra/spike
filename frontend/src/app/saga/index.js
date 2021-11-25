@@ -7,6 +7,7 @@ import {
 } from './tasksSaga'
 
 export default function* rootSaga() {
+    console.trace('rootSaga')
     yield all([
         //auth
         watchCheckSession(),
