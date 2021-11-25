@@ -1,26 +1,38 @@
 const passport = require("passport");
 const AuthController = require("../controllers/authController");
 
+
 module.exports = router => {
+    //Google Register/Login
     router.get(
         "/auth/google",
-        passport.authenticate("google", { scope: ["email"] })
+        passport.authenticate("google", {
+            scope: [
+                "email",
+                "profile",
+                "https://www.googleapis.com/auth/calendar.readonly"
+            ]
+        })
     );
 
+    //Google OAuth callback route
     router.get(
         "/auth/google/callback",
         passport.authenticate("google", {
-            failureRedirect: "http://localhost:3000",
+            failWithError: true,
+            failureRedirect: "http://localhost:3000/login?retry=true",
             successRedirect: "http://localhost:3000"
         }),
-        // AuthController.login
+    );
+    //Verify Session
+    router.get(
+        "/auth/session",
+        AuthController.session
     );
 
-    router.get("/auth/session", (req, res, next) => {
-        console.log(req.user);
-        console.log(req.session);
-        console.log(req.headers); next();
-    }, AuthController.session);
-
-    router.get("/auth/logout", AuthController.logout);
+    //Logout
+    router.get(
+        "/auth/logout",
+        AuthController.logout
+    );
 };
