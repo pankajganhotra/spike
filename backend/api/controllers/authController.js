@@ -1,20 +1,23 @@
 const Cookies = require('cookies');
+const passport = require('passport');
 
-// exports.login = async (req, res, next) => {
-//     const cookies = new Cookies(req, res);
-//     const sessionCookie = cookies.get('connect.sid');
-//     console.log({ sessionCookie });
-//     res.cookie('connect.sid', sessionCookie, {
-//         httpOnly: true,
-//         secure: false,
-//         maxAge: 1000 * 60 * 60 * 24 * 7,
-//     });
-//     res.status(200).json({
-//         auth: true,
-//         user: req.user,
-//         message: 'Login successful'
-//     });
-// };
+exports.login = async (req, res, next) => {
+    let redirectUrl = "http://localhost:3000";
+    console.log(req.body);
+
+    passport.authenticate("google", {
+        scope: ['profile', 'email'],
+        failureRedirect: redirectUrl + "?retry=true",
+        successRedirect: redirectUrl,
+        passReqToCallback: true
+    }, (req, err, user, info) => {
+        console.log("Callback-Passport");
+        //check response sent by passport
+        console.log({ req: req.query, err, user, info })
+        res.send(req.query);
+    });
+    res.redirect(redirectUrl);
+};
 
 exports.logout = async (req, res, next) => {
     req.session.destroy();
