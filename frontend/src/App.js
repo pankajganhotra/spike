@@ -1,33 +1,53 @@
-import React, { useEffect, useState } from "react";
-import { api } from "./resources/api"
+import React, { Suspense, useCallback, useEffect } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { privateRoutes, publicRoutes } from "./routes"
+
+import Header from "./Layout/Header";
+import { useSelector } from "react-redux";
+import { checkSession } from "./app/store/actions/authActions";
 
 const App = () => {
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const { auth, user, loading } = useSelector(state => state.auth)
 
   useEffect(() => {
-    api.get("/auth/session")
-      .then(res => {
-        setUser(res.data.user);
-        setLoading(false);
-      })
-      .catch(err => {
-        console.error(err);
-        setLoading(false);
-      })
+    checkSession()
   }, []);
+
+  const getRoutes = useCallback(() => {
+    if (user) {
+      return privateRoutes;
+    } else {
+      return publicRoutes;
+    }
+  }, [user])
 
 
   if (loading) {
     return <div>Loading...</div>
   }
 
-  if (!user) {
-    return <div>No user</div>
-  }
-
-  return (<div className="App"> {JSON.stringify(user)} </div>
-  );
+  return (
+    <BrowserRouter>
+      <Header user={user} />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Switch>
+          {getRoutes().map(route => (
+            <Route
+              key={route.path}
+              path={route.path}
+              exact={route.exact}
+              render={props => (
+                <route.component
+                  {...props} //Routing props
+                  {...(route.props || {})} //Component props defined in routes.js
+                />
+              )}
+            />
+          ))}
+        </Switch>
+      </Suspense>
+    </BrowserRouter>
+  )
 
 }
 
