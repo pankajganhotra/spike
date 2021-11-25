@@ -1,16 +1,17 @@
-import Button from "@restart/ui/esm/Button";
 import React from "react";
-import { Col, Container } from "react-bootstrap";
+import { Col, Container, Button, Card } from "react-bootstrap";
+import { GoogleButton } from "../../Components/buttons";
 
 const LoginPage = () => {
-  const handleLogin = () => {
-    window.location.href = "http://localhost:4000/auth/google";
-  };
   return (
     <Container>
-      <Col>
-        <h1>Login</h1>
-        <Button onClick={handleLogin}>Sign in with Google</Button>
+      <Col className="mx-auto text-center" sm="6" xs="12">
+        <Card>
+          <Card.Title>Login</Card.Title>
+          <Card.Body>
+            <GoogleButton />
+          </Card.Body>
+        </Card>
       </Col>
     </Container>
   );
