@@ -7,7 +7,11 @@ const taskSchema = new Schema({
         type: String,
         default: v4,
     },
-    title: {
+    user_id: {
+        type: String,
+        required: true,
+    },
+    content: {
         type: String,
         required: true,
     },
