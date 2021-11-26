@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 module.exports = async (err, req, res, next) => {
     try {
+        console.error(err);
         if (err instanceof mongoose.Error) {
             return res.status(400).json({
                 status: 'error',
