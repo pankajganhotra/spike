@@ -16,6 +16,7 @@ mongoose.connect(dbConfig.url, dbConfig.options).then(() => {
     console.log('Connected to database');
 }).catch((err) => {
     console.log('Connection failed', err);
+    process.exit(0);
 });
 
 
