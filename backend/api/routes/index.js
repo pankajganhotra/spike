@@ -2,8 +2,10 @@ const router = require('express').Router();
 
 
 //Auth Routes
-require('./authRoutes')(router);
+router.use('/auth', require('./authRoutes'));
+
 //Task Routes
-require('./taskRoutes')(router);
+router.use('/tasks', require('./taskRoutes'));
+
 
 module.exports = router;

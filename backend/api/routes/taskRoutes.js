@@ -4,26 +4,26 @@ const taskAuthorizationMiddleware = require('../middleware/taskAuthorizationMidd
 
 module.exports = router => {
     router.get(
-        '/tasks',
+        '',
         authMiddleware,
         TaskController.getAllTasks
     );
 
     router.post(
-        '/tasks/add',
+        '/add',
         authMiddleware,
         TaskController.addTask
     );
 
     router.put(
-        '/tasks/update/:task_id',
+        '/update/:task_id',
         authMiddleware,
         taskAuthorizationMiddleware,
         TaskController.updateTask
     );
 
     router.delete(
-        '/tasks/remove/:task_id',
+        '/remove/:task_id',
         authMiddleware,
         taskAuthorizationMiddleware,
         TaskController.removeTask
