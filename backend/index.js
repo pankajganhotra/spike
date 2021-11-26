@@ -57,11 +57,17 @@ app.use(json({ limit: '50mb' }));
 
 //Routes
 const routes = require('./api/routes');
-const { options } = require("./api/routes");
 app.use(routes);
 
-app.listen(4000, () => {
-    console.log('Server started on port 5000');
+//Error Handling
+const errorHandler = require('./api/helpers/errorHandler');
+app.use(errorHandler);
+
+const HOST = process.env.HOST || '0.0.0.0';
+const PORT = process.env.PORT || 4000;
+
+app.listen(PORT, () => {
+    console.log(`Server is running on ${HOST}:${PORT}`);
 })
 
 

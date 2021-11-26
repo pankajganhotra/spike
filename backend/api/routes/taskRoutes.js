@@ -8,11 +8,13 @@ module.exports = router => {
         authMiddleware,
         TaskController.getAllTasks
     );
+
     router.post(
         '/tasks/add',
         authMiddleware,
         TaskController.addTask
     );
+
     router.put(
         '/tasks/update/:task_id',
         authMiddleware,
@@ -22,6 +24,7 @@ module.exports = router => {
 
     router.delete(
         '/tasks/remove/:task_id',
+        authMiddleware,
         taskAuthorizationMiddleware,
         TaskController.removeTask
     );

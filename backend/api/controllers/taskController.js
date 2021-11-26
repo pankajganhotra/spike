@@ -38,7 +38,8 @@ exports.updateTask = async (req, res, next) => {
                 user_id: req.user._id // to prevent user from changing the user_id
             }
         }, {
-            new: true
+            new: true,
+            runValidators: true
         })
         res.send({
             task,
