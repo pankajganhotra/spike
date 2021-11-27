@@ -8,6 +8,7 @@ import { checkSession } from "./app/store/actions/authActions";
 import Fallback from "./Util/Fallback";
 import ErrorBoundary from "./Util/ErrorBoundary";
 import { ToastContainer } from "react-toastify"
+import Modals from "./Modals";
 
 
 const App = () => {
@@ -18,15 +19,15 @@ const App = () => {
   }, []);
 
   const getRoutes = useCallback(() => {
-    if (user) {
+    if (auth) {
       return privateRoutes;
     } else {
       return publicRoutes;
     }
-  }, [user]);
+  }, [auth]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Fallback />;
   }
 
   return (
@@ -52,6 +53,7 @@ const App = () => {
             ))}
           </Switch>
         </Suspense>
+        <Modals />
       </BrowserRouter>
     </ErrorBoundary>
   );

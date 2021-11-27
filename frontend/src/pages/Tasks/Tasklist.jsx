@@ -3,6 +3,7 @@ import { Col, Container } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { getTasks } from "../../app/store/actions/taskActions";
 import Fallback from "../../Util/Fallback";
+import NoTasks from "./NoTasks";
 import Task from "./Task";
 
 const Tasklist = () => {
@@ -17,7 +18,7 @@ const Tasklist = () => {
   }
 
   if (!count) {
-    return <h1>No Tasks Exist </h1>;
+    return <NoTasks />;
   }
 
   return (
