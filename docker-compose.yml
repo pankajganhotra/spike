@@ -1,0 +1,36 @@
+version: 3.0.0
+services:
+  # MongoDB
+  mongo:
+    image: mongo
+    container_name: mongo-container
+    ports:
+      - "27017:27017"
+
+  # Node js Backend
+  backend:
+    build: ./backend/
+    container_name: nodejs-container
+    ports:
+      - "4000:4000"
+    restart: unless-stopped
+    environment:
+      - MONGODB_URI=mongodb://mongo:27017/
+    links:
+      - mongo
+    depends_on:
+      - mongo
+  # React js Frontend
+  # frontend:
+  #   build: ./frontend/
+  #   container_name: reactjs-container
+  #   ports:
+  #     - "3000:3000"
+  #   restart: unless-stopped
+  #   links:
+  #     - backend
+  #   depends_on:
+  #     - backend
+
+
+

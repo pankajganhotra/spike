@@ -36,7 +36,7 @@ exports.session = async (req, res, next) => {
             message: 'Session successful'
         });
     } else {
-        res.status(401).json({
+        res.status(200).json({
             auth: false,
             message: 'No session'
         });

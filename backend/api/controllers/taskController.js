@@ -53,7 +53,7 @@ exports.updateTask = async (req, res, next) => {
 exports.removeTask = async (req, res, next) => {
     try {
         const task = await Task.findOneAndDelete({
-            _id: req.params.id,
+            _id: req.params.task_id,
             user: req.user._id
         })
         res.send({
