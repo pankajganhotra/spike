@@ -1,9 +1,18 @@
-FROM node:alpine
-RUN mkdir /app
+FROM node:16.6.1
+
+# Will create directory /app
 WORKDIR /app
-COPY package.json ./
-COPY package-lock.json ./
+
+COPY package*.json ./
+
 COPY ./ ./
-RUN npm i
+
+RUN npm install --silent
+
 RUN npm run build
-CMD ["serve", "build"]
+
+RUN npm i -g serve
+
+EXPOSE 3000
+
+CMD ["serve", "build" ,"-s"]

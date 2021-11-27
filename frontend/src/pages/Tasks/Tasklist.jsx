@@ -23,6 +23,7 @@ const Tasklist = () => {
 
   return (
     <Container>
+      <h3 className="text-center">Tasks Total ({count})</h3>
       <Col>
         {items.map((item) => (
           <Task key={item._id} task={item} />

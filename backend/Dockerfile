@@ -1,9 +1,15 @@
 FROM node:16.6.1
-RUN mkdir /app
+
+# Will create directory /app
 WORKDIR /app
+
 COPY package*.json ./
+
+COPY ./ ./
+
 RUN npm install
-COPY . .
+
 EXPOSE 4000
+
 CMD [ "npm", "start" ]
 

@@ -21,16 +21,16 @@ services:
     depends_on:
       - mongo
   # React js Frontend
-  # frontend:
-  #   build: ./frontend/
-  #   container_name: reactjs-container
-  #   ports:
-  #     - "3000:3000"
-  #   restart: unless-stopped
-  #   links:
-  #     - backend
-  #   depends_on:
-  #     - backend
+  frontend:
+    build: ./frontend/
+    container_name: reactjs-container
+    ports:
+      - "3000:3000"
+    restart: unless-stopped
+    links:
+      - backend
+    depends_on:
+      - backend
 
 
 
