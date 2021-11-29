@@ -21,8 +21,12 @@ router.get(
     "/google/callback",
     passport.authenticate("google", {
         failWithError: true,
-        failureRedirect: "http://localhost:3000/login?retry=true",
-        successRedirect: "http://localhost:3000"
+        failureRedirect: (process.env.NODE_ENV === 'production'
+            ? process.env.PROD_FRONTEND_URL
+            : process.env.DEV_FRONTEND_URL) + "/login?retry=true",
+        successRedirect: process.env.NODE_ENV === 'production'
+            ? process.env.PROD_FRONTEND_URL
+            : process.env.DEV_FRONTEND_URL
     }),
 );
 

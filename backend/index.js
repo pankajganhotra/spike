@@ -48,9 +48,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 //Cors Setup
 app.use(cors({
-    origin: process.env.NODE_ENV === 'production'
-        ? process.env.PROD_FRONTEND_URL
-        : process.env.DEV_FRONTEND_URL,
+    origin: true,
     credentials: true,
     optionsSuccessStatus: 200
 }));
