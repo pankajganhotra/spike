@@ -31,7 +31,7 @@ app.use(session({
     cookie: {
         httpOnly: true,
         maxAge: 1000 * 60 * 60 * 24 * 7,// 1 week
-        secure: false
+        secure: true
     }
 }));
 
@@ -63,7 +63,7 @@ const routes = require('./api/routes');
 app.use(routes);
 
 app.get("/", (req, res) => {
-    res.json({
+    return res.json({
         status: "Server Running"
     });
 })
