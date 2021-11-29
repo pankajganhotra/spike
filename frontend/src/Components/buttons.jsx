@@ -1,9 +1,10 @@
 import React from "react";
 import { Button } from "react-bootstrap";
+import { api } from "../resources/api";
 
 export const GoogleButton = (props) => {
   const handleLogin = () => {
-    window.location.href = "http://localhost:4000/auth/google";
+    window.location.href = api.defults.baseURL + "/auth/google";
   };
 
   return (
