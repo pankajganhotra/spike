@@ -3,7 +3,9 @@ import { toast } from "react-toastify"
 import { setAuth } from '../app/store/actions/authActions';
 
 export const api = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
+    baseURL: process.env.REACT_APP_ENV === 'production'
+        ? process.env.REACT_APP_PROD_SERVER_URL
+        : process.env.REACT_APP_DEV_SERVER_URL,
     withCredentials: true
 });
 

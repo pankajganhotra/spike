@@ -48,7 +48,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 //Cors Setup
 app.use(cors({
-    origin: 'http://localhost:3000',
+    origin: process.env.NODE_ENV === 'production'
+        ? process.env.PROD_FRONTEND_URL
+        : process.env.DEV_FRONTEND_URL,
     credentials: true,
     optionsSuccessStatus: 200
 }));
@@ -59,6 +61,13 @@ app.use(json({ limit: '50mb' }));
 //Routes
 const routes = require('./api/routes');
 app.use(routes);
+
+app.get("/", (req, res) => {
+    res.json({
+        status: "Server Running"
+    });
+})
+
 
 //Error Handling
 const errorHandler = require('./api/helpers/errorHandler');
