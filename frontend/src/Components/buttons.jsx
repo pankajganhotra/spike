@@ -4,7 +4,7 @@ import { api } from "../resources/api";
 
 export const GoogleButton = (props) => {
   const handleLogin = () => {
-    window.location.href = api.defults.baseURL + "/auth/google";
+    window.location.href = api.defaults.baseURL + "/auth/google";
   };
 
   return (
