@@ -1,13 +1,13 @@
 import React, { Suspense } from "react";
-import Fallback from "../Util/Fallback";
+// import Fallback from "../Util/Fallback";
 
 const AddTaskModal = React.lazy(() => import("./AddTaskModal"));
 
 const Modals = () => {
   return (
-    <Suspense fallback={<Fallback />}>
+    <div className="modals-container">
       <AddTaskModal />
-    </Suspense>
+    </div>
   );
 };
 

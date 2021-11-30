@@ -1,15 +1,20 @@
 import { produce } from 'immer';
-import { SET_AUTH } from '../actionTypes/authActionTypes';
+import { CHECK_SESSION, SET_AUTH } from '../actionTypes/authActionTypes';
 
 const initialState = {
     auth: false,
-    loading: false,
+    loading: true,
     user: null,
     error: null
 }
 
 const authReducer = produce((state, { type, payload }) => {
     switch (type) {
+        case CHECK_SESSION:
+            return {
+                ...state,
+                loading: true
+            }
         case SET_AUTH:
             return {
                 ...state,
