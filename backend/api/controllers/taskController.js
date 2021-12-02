@@ -3,7 +3,7 @@ const Task = mongoose.model('Task')
 
 exports.getAllTasks = async (req, res, next) => {
     try {
-        const tasks = await Task.find({ user: req.user._id })
+        const tasks = await Task.find({ user_id: req.user._id })
         res.send({
             tasks,
             count: tasks.length,
@@ -31,7 +31,7 @@ exports.updateTask = async (req, res, next) => {
     try {
         const task = await Task.findOneAndUpdate({
             _id: req.params.task_id,
-            user: req.user._id
+            user_id: req.user._id
         }, {
             $set: {
                 ...req.body,
@@ -54,7 +54,7 @@ exports.removeTask = async (req, res, next) => {
     try {
         const task = await Task.findOneAndDelete({
             _id: req.params.task_id,
-            user: req.user._id
+            user_id: req.user._id
         })
         res.send({
             task,
