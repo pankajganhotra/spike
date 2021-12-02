@@ -52,8 +52,8 @@ const App = () => {
               />
             ))}
           </Switch>
+          <Modals />
         </Suspense>
-        <Modals />
       </BrowserRouter>
     </ErrorBoundary>
   );
